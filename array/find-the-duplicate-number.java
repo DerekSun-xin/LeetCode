@@ -1,17 +1,19 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int duplicate = -1; 
-        for (int num: nums){
-            int cur = Math.abs(num);
-            if (nums[cur] < 0){
-                duplicate = cur; 
-                break;
+        for(int i = 0; i < nums.length; i++){
+            if (nums[i] == nums[nums[i]-1]){
+                if (i == nums[i]-1){
+                    continue;
+                }else{
+                    return nums[i]; 
+                }
             }
-            nums[cur] = -nums[cur]; 
+            while(nums[i] != nums[nums[i]-1]){
+                int temp = nums[nums[i]-1];
+                nums[nums[i]-1]=nums[i];
+                nums[i]=temp; 
+            }
         }
-        for (int i = 0; i< nums.length; i++){
-            nums[i] = Math.abs(nums[i]); 
-        }
-        return duplicate; 
+        return -1; 
     }
 }
