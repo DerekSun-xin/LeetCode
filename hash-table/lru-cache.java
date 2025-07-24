@@ -28,9 +28,19 @@ class LRUCache {
     }
     
     public void put(int key, int value) {
+        ListNode newNode; 
         if (map.containsKey(key)){
-            ListNode node = map.get(key);
-            node.val = value;
+            newNode = map.get(key);
+            newNode.val = value;
+            ListNode prev = newNode.prev;
+            ListNode next = newNode.next;
+            prev.next = next;
+            next.prev = prev;
+            ListNode last = tail.prev;
+            newNode.prev = last;
+            last.next = newNode; 
+            newNode.next = tail; 
+            tail.prev = newNode;  
         }else{
             if (map.size() == capacity){
                 // Evict the LRU 
@@ -42,14 +52,14 @@ class LRUCache {
                 head.next = next;
                 next.prev = head; 
             }
-            ListNode newNode = new ListNode(key, value);
+            newNode = new ListNode(key, value);
             map.put(key, newNode); 
             ListNode last = tail.prev;
             newNode.prev = last;
             last.next = newNode; 
             newNode.next = tail; 
-            tail.prev = newNode; 
-        }
+            tail.prev = newNode;  
+        }  
     }
 }
 
