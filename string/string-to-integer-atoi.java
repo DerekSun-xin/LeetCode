@@ -13,7 +13,7 @@ class Solution {
 
         // 3. Determine the sign
         if(index < n & (s.charAt(index) == '+' || s.charAt(index) == '-')){
-            sign = s.charAt(index) == '+' ? 1:-1; 
+            sign = s.charAt(index) == '+' ? 1: -1; 
             index++; 
         }
 
@@ -21,7 +21,7 @@ class Solution {
         while(index < n && Character.isDigit(s.charAt(index))){
             int digit = s.charAt(index) - '0'; 
             if (result > Integer.MAX_VALUE/10 || (result == Integer.MAX_VALUE/10 && digit > Integer.MAX_VALUE % 10)){
-                return Integer.MAX_VALUE; 
+                return sign == 1?Integer.MAX_VALUE: Integer.MIN_VALUE; 
             }
             result = result*10 + digit; 
             index++; 
