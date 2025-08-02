@@ -16,6 +16,11 @@ class Solution {
             }else if(curChar == '-'){
                 break; 
             }
+            if (curChar == '+' && isLeadSign){
+                continue; 
+            }else if(curChar == '+'){
+                break; 
+            }
             if (!Character.isDigit(curChar)){
                 break; 
             }
