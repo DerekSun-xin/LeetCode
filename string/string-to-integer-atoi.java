@@ -5,6 +5,9 @@ class Solution {
         int sign = 1; 
         int result = 0; 
         int n = s.length(); 
+        if (n == 0){
+            return 0; 
+        }
 
         // 2. Filter out all whitespaces
         while (index < n && s.charAt(index) == ' '){
