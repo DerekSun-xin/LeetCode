@@ -17,7 +17,7 @@ class Solution {
         // Deal with digits 
         while(index < n && Character.isDigit(s.charAt(index))){
             int digit = s.charAt(index) - '0';
-            if (result > Integer.MAX_VALUE || (result == Integer.MAX_VALUE && digit > Integer.MAX_VALUE)){
+            if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE /10 && digit > Integer.MAX_VALUE % 10)){
                 return (sign == 1) ? Integer.MAX_VALUE: Integer.MIN_VALUE;
             }
             result = result * 10 + digit;
