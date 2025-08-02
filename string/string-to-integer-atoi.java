@@ -11,12 +11,14 @@ class Solution {
                 continue;
             }
             if (curChar == '-' && isLeadSign){
+                isLeadSign = false; 
                 sign = -1;
                 continue; 
             }else if(curChar == '-'){
                 break; 
             }
             if (curChar == '+' && isLeadSign){
+                isLeadSign = false; 
                 continue; 
             }else if(curChar == '+'){
                 break; 
@@ -24,11 +26,12 @@ class Solution {
             if (!Character.isDigit(curChar)){
                 break; 
             }
-            isLeadSign = false; 
             if(digit == 0 && isLeadZero){
                 isLeadZero = false; 
+                isLeadSign = false;
                 continue; 
             }
+            isLeadSign = false;
             if (sign == 1){
                 if (curInt > Integer.MAX_VALUE/10){
                     return Integer.MAX_VALUE;
