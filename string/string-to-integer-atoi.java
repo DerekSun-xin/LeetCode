@@ -3,19 +3,23 @@ class Solution {
         int sign = 1;
         int curInt = 0; 
         boolean isLeadZero = true; 
+        boolean isLeadSign = true; 
         for(int i = 0; i < s.length(); i++){
             char curChar = s.charAt(i); 
             int digit = curChar - '0'; 
             if (curChar == ' '){
                 continue;
             }
-            if (curChar == '-'){
+            if (curChar == '-' && isLeadSign){
                 sign = -1;
                 continue; 
+            }else if(curChar == '-'){
+                break; 
             }
             if (!Character.isDigit(curChar)){
                 break; 
             }
+            isLeadSign = false; 
             if(digit == 0 && isLeadZero){
                 isLeadZero = false; 
                 continue; 
