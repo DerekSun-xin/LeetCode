@@ -10,7 +10,7 @@ class Solution {
             index++;
         }
         // Deal with sign
-        if (index < n && (s.charAt(index) == '+') || (s.charAt(index) == '-')){
+        if (index < n && (s.charAt(index) == '+' || s.charAt(index) == '-')){
             sign = s.charAt(index) == '+'? 1: -1;
             index++;
         }
