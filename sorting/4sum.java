@@ -5,7 +5,17 @@ class Solution {
         int n = nums.length;
 
         for (int i = 0; i < n-3; i++){
+            if(i!=0){
+                if(nums[i] == nums[i-1]){
+                    continue;
+                }
+            }
             for (int j = i+1; j < n-2; j++){
+                if(j!=1){
+                    if(nums[j] == nums[j-1]){
+                        continue; 
+                    }
+                }
                 int left = j+1;
                 int right = n-1;
                 while(left < right){
@@ -22,19 +32,11 @@ class Solution {
                         }
                     }else{
                         result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
-                        right--;
-                        left++;
-                        while(right > 0 && nums[right] == nums[right+1]){
-                            right--;
-                        }
-                        while(left < n && nums[left]==nums[left-1]){
-                            left++;
-                        }
+                        break; 
                     }
                 }
             }
         }
-        result = result.stream().distinct().collect(Collectors.toList());
         return result;
     }
 }
