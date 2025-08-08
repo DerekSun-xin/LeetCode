@@ -4,15 +4,14 @@ class Solution {
         return kSum(nums, 0, 4, target); 
     }
     
-    public List<List<Integer>> kSum(int[] nums, int start, int k, int target){
+    public List<List<Integer>> kSum(int[] nums, int start, int k, long target){
         List<List<Integer>> result = new ArrayList<>();
         int n = nums.length;
-        int averageValue = target/k;  
         if (start >= n){
             return result; 
-        }else if(nums[start] > averageValue){
+        }else if((long)nums[start] * k > target){
             return result;
-        }else if(nums[n-1]< averageValue){
+        }else if((long)nums[n-1]*k < target){
             return result; 
         }
         if (k == 2){
@@ -32,12 +31,12 @@ class Solution {
         return result; 
     }
     
-    public List<List<Integer>> twoSum(int[] nums, int target, int start){
+    public List<List<Integer>> twoSum(int[] nums, long target, int start){
         List<List<Integer>> res = new ArrayList<>(); 
         int left = start;
         int right = nums.length-1; 
         while (left < right){
-            int sum = nums[left] + nums[right]; 
+            long sum = nums[left] + nums[right]; 
             if (sum > target){
                 right--;
             }else if (sum < target){
