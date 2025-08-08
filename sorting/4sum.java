@@ -6,12 +6,13 @@ class Solution {
     
     public List<List<Integer>> kSum(int[] nums, int start, int k, int target){
         List<List<Integer>> result = new ArrayList<>();
-        int n = nums.length; 
+        int n = nums.length;
+        int averageValue = target/k;  
         if (start >= n){
             return result; 
-        }else if(nums[start] * k > target){
+        }else if(nums[start] > averageValue){
             return result;
-        }else if(nums[n-1]*k < target){
+        }else if(nums[n-1]< averageValue){
             return result; 
         }
         if (k == 2){
