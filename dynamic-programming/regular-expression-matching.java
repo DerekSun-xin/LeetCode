@@ -22,7 +22,7 @@ class Solution {
                     dp[i][j]=dp[i][j-2];
                     char prevPChar = p.charAt(j-2);
                     if (sChar == prevPChar || prevPChar == '.' ){
-                        dp[i][j] = dp[i][j] || dp[i-1][j-1];
+                        dp[i][j] = dp[i][j] || dp[i-1][j];
                     }
                 }else{
                     dp[i][j] = false;
