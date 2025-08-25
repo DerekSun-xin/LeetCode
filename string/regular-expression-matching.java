@@ -1,35 +1,40 @@
 class Solution {
     public boolean isMatch(String s, String p) {
-        if (p == null || p.isEmpty()){
-            return (s == null || s.isEmpty());
-        }
+        int sLen = s.length();
+        int pLen = p.length();
 
-        boolean[][] dp = new boolean[s.length()+1][p.length()+1];
+        boolean[][] dp = new boolean[sLen+1][pLen+1];
+        // Base Case 1
         dp[0][0] = true;
-        for (int j = 1; j <= p.length(); j++){
-            if (p.charAt(j-1) == '*'){
-                dp[0][j]=dp[0][j-2];
+        // Base Case 2: a*;a*b* can match empty string
+        for(int j=1; j<=pLen; j++){
+            if(p.charAt(j-1) == '*'){
+                dp[0][j] = dp[0][j-2];
             }
         }
 
-        for(int i = 1; i <= s.length(); i++){
-            for(int j = 1; j <= p.length(); j++){
-                char sChar = s.charAt(i-1);
+        for(int i=1; i<=sLen; i++){
+            for(int j=1; j<=pLen; j++){
                 char pChar = p.charAt(j-1);
+                char sChar = s.charAt(i-1);
+
                 if (pChar == '.' || pChar == sChar){
                     dp[i][j] = dp[i-1][j-1];
-                }else if (pChar == '*'){
-                    dp[i][j]=dp[i][j-2];
-                    char prevPChar = p.charAt(j-2);
-                    if (sChar == prevPChar || prevPChar == '.' ){
+                }else if(pChar == '*'){
+                    // Case 1: * match zero of precede element
+                    dp[i][j] = dp[i][j-2];
+
+                    // Case 2: * match one or more of precede element
+                    char pPrevChar = p.charAt(j-2);
+                    if (pPrevChar == '.' || pPrevChar == sChar){
                         dp[i][j] = dp[i][j] || dp[i-1][j];
                     }
                 }else{
-                    dp[i][j] = false;
+                    dp[i][j] = false; 
                 }
             }
         }
-        return dp[s.length()][p.length()];
 
+        return dp[sLen][pLen];
     }
 }
