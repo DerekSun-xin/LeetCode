@@ -18,7 +18,7 @@ class Solution {
             tmp = tmp.next; 
         }
         // Handle edge case where list size <= k
-        if (ls.size() <= k){
+        if (ls.size() < k){
             return head; 
         }
         // Iterate the list to reverse the list k at a time
