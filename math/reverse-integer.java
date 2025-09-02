@@ -1,20 +1,26 @@
 class Solution {
     public int reverse(int x) {
-        // Method 1: Can use long
-        // Initialize long reverseX
-        long reverseX = 0; 
+        // Method 2: Cannot use long
+        // Initialize int reverseX
+        int reverseX = 0; 
 
-        // While loop to go through each digit of x
+        // While loop to iterate each digit of x and judge if reverseX is out of bounds
         while (x != 0){
-            reverseX = 10*reverseX + x%10;
-            x/=10;  
+            if (x > 0){
+                if (reverseX > Integer.MAX_VALUE / 10 || 
+                (reverseX == Integer.MAX_VALUE / 10 && x%10 > 7)){
+                    return 0; 
+                }
+            }else if(x < 0){
+                if (reverseX < Integer.MIN_VALUE / 10 ||
+                (reverseX == Integer.MIN_VALUE / 10 && x%10 < 2)){
+                    return 0; 
+                }
+            }
+            reverseX = 10* reverseX + x%10; 
+            x/=10; 
         }
 
-        // Judge if reverseX in range signed 32-bit integer and return accordingly. 
-        if (reverseX > Integer.MAX_VALUE || reverseX < Integer.MIN_VALUE){
-            return 0;
-        }else{
-            return (int)reverseX; 
-        }
+        return reverseX; 
     }
 }
