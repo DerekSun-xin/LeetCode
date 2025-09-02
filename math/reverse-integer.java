@@ -13,7 +13,7 @@ class Solution {
                 }
             }else if(x < 0){
                 if (reverseX < Integer.MIN_VALUE / 10 ||
-                (reverseX == Integer.MIN_VALUE / 10 && x%10 < 2)){
+                (reverseX == Integer.MIN_VALUE / 10 && x%10 < -8)){
                     return 0; 
                 }
             }
