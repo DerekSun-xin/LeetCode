@@ -6,18 +6,16 @@ class Solution {
 
         // While loop to iterate each digit of x and judge if reverseX is out of bounds
         while (x != 0){
-            if (x > 0){
-                if (reverseX > Integer.MAX_VALUE / 10 || 
-                (reverseX == Integer.MAX_VALUE / 10 && x%10 > 7)){
+            int pop = x % 10; // Get the last digit
+            if (reverseX > Integer.MAX_VALUE / 10 || 
+                (reverseX == Integer.MAX_VALUE / 10 && pop > 7)){
                     return 0; 
                 }
-            }else if(x < 0){
-                if (reverseX < Integer.MIN_VALUE / 10 ||
-                (reverseX == Integer.MIN_VALUE / 10 && x%10 < -8)){
+            if (reverseX < Integer.MIN_VALUE / 10 ||
+                (reverseX == Integer.MIN_VALUE / 10 && pop < -8)){
                     return 0; 
                 }
-            }
-            reverseX = 10* reverseX + x%10; 
+            reverseX = 10* reverseX + pop; 
             x/=10; 
         }
 
