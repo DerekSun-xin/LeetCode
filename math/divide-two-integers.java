@@ -3,9 +3,9 @@ class Solution {
         if (dividend == 0){
             return 0; 
         }
-        if (dividend == divisor{
+        if (dividend == divisor){
             return 1; 
-        })
+        }
         int quotient = 0; 
         if (dividend > 0 && divisor > 0){
             while(dividend > 0){
