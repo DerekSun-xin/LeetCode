@@ -22,10 +22,10 @@ class Solution {
             while (remainder >= absDivisor << (shift + 1)){ // pow returns double type; Need to convert to int
                 shift++;
             }
-            quotient += 1 << shift;
+            quotient += 1L << shift;
             remainder -= absDivisor << shift;
         }
 
-        return sign * quotient;
+        return (int)sign * quotient;
     }
 }
