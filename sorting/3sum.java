@@ -20,7 +20,10 @@ class Solution {
                     start++;
                 }else{
                     ret.add(new ArrayList<>(List.of(nums[i], nums[start], nums[end]))); 
-                    start
+                    start++;
+                    while (nums[start] == nums[start-1] && start < end){
+                        start++; 
+                    }
                 }
             }
         }
