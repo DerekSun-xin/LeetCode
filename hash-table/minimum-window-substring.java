@@ -22,7 +22,7 @@ class Solution {
             while (haveCharCount == t.length()){
                 if (r-l+1 < minWindow[1] - minWindow[0]){
                     minWindow[0] = l;
-                    minWindow[1] = r; 
+                    minWindow[1] = r+1; 
                 }
                 // Move left index
                 char leftChar = s.charAt(l);
@@ -39,7 +39,7 @@ class Solution {
         if (minWindow[1] - minWindow[0] > s.length()){
             return ""; 
         }else{
-            return s.substring(minWindow[0], minWindow[1]+1); 
+            return s.substring(minWindow[0], minWindow[1]); 
         }
     }
 }
