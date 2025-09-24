@@ -5,36 +5,41 @@ class Solution {
         }
         HashMap<Character, Integer> sCount = new HashMap<>(); 
         HashMap<Character, Integer> tCount = new HashMap<>(); 
-        for(int i = 0; i < t.length(); i++){
-            sCount.put(s.charAt(i), sCount.getOrDefault(s.charAt(i), 0) + 1); 
+        for(int i = 0; i < t.length(); i++){  
             tCount.put(t.charAt(i), tCount.getOrDefault(t.charAt(i), 0) + 1); 
         }
-        if (sCount.equals(tCount)){
-            return s.substring(0, t.length()); 
-        }
-        
-        int left = 0; 
-        String subString = ""; 
-        for(int j = t.length(); j < s.length(); j++){
-            char curChar = s.charAt(j); 
-            sCount.put(curChar, sCount.getOrDefault(curChar, 0) + 1);
-            while (cover(sCount, tCount)){
-                if (subString.isEmpty() || j - left + 1 < subString.length()){
-                    subString = s.substring(left, j+1); 
+        int[] minWindow = {0, Integer.MAX_VALUE}; 
+        int l = 0; 
+        int haveCharCount = 0; 
+        for(int r = 0; r < s.length(); r++){
+            char curChar = s.charAt(r); 
+            if (tCount.containsKey(curChar)){
+                if (sCount.getOrDefault(curChar, 0) < tCount.get(curChar)){
+                    haveCharCount++; 
                 }
-                sCount.put(s.charAt(left), sCount.get(s.charAt(left)) - 1); 
-                left++; 
+                sCount.put(curChar, sCount.getOrDefault(curChar, 0)+1); 
+            }
+            while (haveCharCount == t.length()){
+                if (r-l+1 < minWindow[1] - minWindow[0]){
+                    minWindow[0] = l;
+                    minWindow[1] = r; 
+                }
+                // Move left index
+                char leftChar = s.charAt(l);
+                if (tCount.containsKey(leftChar)){
+                    sCount.put(leftChar, sCount.get(leftChar) - 1); 
+                    if (sCount.get(leftChar) < tCount.get(leftChar)){
+                        haveCharCount--;
+                    }
+                }
+                l++; 
             }
         }
-        return subString; 
-    }
 
-    private boolean cover(HashMap<Character, Integer> sCount, HashMap<Character, Integer> tCount){
-        for (Map.Entry<Character, Integer> entry: tCount.entrySet()){
-            if (sCount.getOrDefault(entry.getKey(), 0) < entry.getValue()){
-                return false; 
-            }
+        if (minWindow[1] - minWindow[0] > s.length()){
+            return ""; 
+        }else{
+            return s.substring(minWindow[0], minWindow[1]+1); 
         }
-        return true; 
     }
 }
