@@ -10,16 +10,25 @@ class Solution {
                     stack.push(curChar);
                     break;
                 case ')':
+                    if (stack.isEmpty()){
+                        return false; 
+                    }
                     if (stack.pop() != '('){
                         return false; 
                     }
                     break;
                 case '}':
+                    if (stack.isEmpty()){
+                        return false; 
+                    }
                     if (stack.pop() != '{'){
                         return false; 
                     }
                     break;
                  case ']':
+                    if (stack.isEmpty()){
+                        return false; 
+                    }
                     if (stack.pop() != '['){
                         return false; 
                     }
