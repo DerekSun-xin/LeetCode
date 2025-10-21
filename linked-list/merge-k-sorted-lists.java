@@ -10,32 +10,25 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        // Handle edge case where the lists is null or empty
-        if (lists == null || lists.length == 0){
-            return null; 
-        }
-        // Initialize the minHeap 
-        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a,b) -> a.val - b.val);
-        // Populate the minHeap with head nodes from lists.
-         for (ListNode head: lists){
-            if (head != null){
-                minHeap.add(head); 
+        // Min-Heap 
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val - b.val); 
+        ListNode dummy = new ListNode();
+        ListNode cur = dummy; 
+        for(ListNode curNode: lists){
+            if (curNode != null){
+                pq.add(curNode);
             }
         }
-        // Build the result ListNode
-        ListNode dummyHead = new ListNode(); 
-        ListNode tmp = dummyHead; 
-        while(!minHeap.isEmpty()){
-            ListNode node = minHeap.poll(); 
-            ListNode newNode = new ListNode(node.val); 
-            tmp.next = newNode;
-            tmp = tmp.next;
+        
+        while(!pq.isEmpty()){
+            ListNode minNode = pq.poll();
+            cur.next = minNode;
+            cur = cur.next; 
+            if (minNode.next != null){
+                pq.add(minNode.next); 
+            }
+        }
 
-            if(node.next != null){
-                minHeap.add(node.next); 
-            }
-        }
-        // Return the result ListNode
-        return dummyHead.next; 
+        return dummy.next;
     }
 }
