@@ -10,25 +10,33 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        // Min-Heap 
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val - b.val); 
-        ListNode dummy = new ListNode();
-        ListNode cur = dummy; 
-        for(ListNode curNode: lists){
-            if (curNode != null){
-                pq.add(curNode);
-            }
+        if (lists.length == 0){
+            return null; 
         }
-        
-        while(!pq.isEmpty()){
-            ListNode minNode = pq.poll();
-            cur.next = minNode;
-            cur = cur.next; 
-            if (minNode.next != null){
-                pq.add(minNode.next); 
+        int interval = 1; 
+        while (interval < lists.length){
+            for(int i = 0; i + interval < lists.length; i = i + interval * 2){
+                lists[i] = mergeTwoLists(lists[i], lists[i + interval]); 
             }
+            interval *= 2; 
         }
+        return lists[0]; 
+    }
 
-        return dummy.next;
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(); 
+        ListNode cur = dummy; 
+        while (list1 != null && list2 != null){
+            if (list1.val <= list2.val){
+                cur.next = list1; 
+                list1 = list1.next; 
+            }else{
+                cur.next = list2; 
+                list2 = list2.next; 
+            }
+            cur = cur.next; 
+        }
+        cur.next = list1 != null ? list1: list2; 
+        return dummy.next; 
     }
 }
