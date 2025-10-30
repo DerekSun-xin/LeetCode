@@ -19,10 +19,16 @@ class Solution {
     }
 
     boolean traverse(TreeNode p, TreeNode q){
-        if (compare(p, q) || compare(p.left, q) || compare(p.right, q)){
+        if (compare(p, q)){
             return true; 
         }
-        return false; 
+        if (p == null){
+            return false; 
+        }
+
+        boolean leftTraverse = traverse(p.left, q); 
+        boolean rightTraverse = traverse(p.right, q); 
+        return leftTraverse || rightTraverse; 
     }
 
       boolean compare(TreeNode p, TreeNode q){
