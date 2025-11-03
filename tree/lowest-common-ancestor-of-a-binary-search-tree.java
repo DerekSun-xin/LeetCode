@@ -14,9 +14,9 @@ class Solution {
         TreeNode cur = root; 
         while(cur != null){
             if (p.val < cur.val && q.val < cur.val){
-                cur = root.left; 
+                cur = cur.left; 
             }else if (p.val > cur.val && q.val > cur.val){
-                cur = root.right;
+                cur = cur.right;
             }else{
                 return cur; 
             }
