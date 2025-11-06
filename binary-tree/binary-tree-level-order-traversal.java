@@ -19,30 +19,29 @@ class Solution {
             return new ArrayList<>();
         }
         // Breadth First Search 
-        Set<TreeNode> visited = new HashSet<>();
-        visited.add(root);  
-        Queue<TreeNode> queue = new ArrayDeque<>(); 
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.add(root); 
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> rootLevelList = new ArrayList<>();
         rootLevelList.add(root.val);
-        res.add(rootLevelList);  
-        
+        res.add(rootLevelList);
+
         while(!queue.isEmpty()){
-            TreeNode cur = queue.poll(); 
-            // Iterate through cur's neighbors 
+            int size = queue.size();
             List<Integer> curLevelList = new ArrayList<>(); 
-            if (cur.left != null && !visited.contains(cur.left)){
-                visited.add(cur.left); 
-                curLevelList.add(cur.left.val);
-                queue.add(cur.left); 
+            for(int i = 0; i < size; i++){
+                TreeNode cur = queue.poll();
+                if (cur.left != null){
+                    curLevelList.add(cur.left.val);
+                    queue.add(cur.left); 
+                }
+                if (cur.right != null){
+                    curLevelList.add(cur.right.val); 
+                    queue.add(cur.right); 
+                }
             }
-            if (cur.right != null && !visited.contains(cur.right)){
-                visited.add(cur.right); 
-                curLevelList.add(cur.right.val); 
-                queue.add(cur.right); 
-            }
-            if (curLevelList.size() !=0){
+        
+            if (curLevelList.size() != 0){
                 res.add(curLevelList); 
             }
         }
