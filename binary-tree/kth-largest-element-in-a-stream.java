@@ -2,16 +2,11 @@ class KthLargest {
     private PriorityQueue<Integer> pq; 
 
     public KthLargest(int k, int[] nums) {
-        nums = Arrays.stream(nums)
-                .boxed()
-                .sorted(Collections.reverseOrder())
-                .mapToInt(Integer::intValue)
-                .toArray(); 
-
         this.pq = new PriorityQueue<>(k); 
-        if (k < nums.length){
-            for (int i = 0; i < k; i++){
-                pq.add(nums[i]); 
+        for (int i = 0; i < nums.length; i++){
+            pq.add(nums[i]); 
+            if (pq.size() > k){
+                pq.poll(); 
             }
         }
     }
