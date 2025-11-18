@@ -9,7 +9,7 @@ class Solution {
             int heaviest = pq.poll();
             int secondHeaviest = pq.poll();
             int diff = heaviest - secondHeaviest;
-            if (diff > 0){
+            if (diff >= 0){
                 pq.add(diff); 
             }
         }
