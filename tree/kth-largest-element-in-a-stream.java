@@ -1,10 +1,13 @@
 class KthLargest {
+    // Use min-heap to store k elements all the time. The smallest element is the kth largest element in the heap. 
     private PriorityQueue<Integer> pq; 
     private int k; 
 
     public KthLargest(int k, int[] nums) {
-        this.pq = new PriorityQueue<>(k); 
+        pq = new PriorityQueue<>();
         this.k = k; 
+
+        // Add k elements into the pq
         for (int i = 0; i < nums.length; i++){
             pq.add(nums[i]); 
             if (pq.size() > k){
@@ -16,9 +19,8 @@ class KthLargest {
     public int add(int val) {
         pq.add(val);
         if (pq.size() > k){
-            pq.poll(); 
+            pq.poll();
         }
-       
         return pq.peek(); 
     }
 }
