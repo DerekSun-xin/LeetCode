@@ -36,7 +36,9 @@ class Twitter {
         PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> Integer.compare(b.counter, a.counter)); 
         for (Integer followee: followees){
             ListNode node = tweets.get(followee); 
-            pq.add(node); 
+            if (node != null){
+                pq.add(node); 
+            }
         }
         
         while (newsFeed.size() < 10 && !pq.isEmpty()){
