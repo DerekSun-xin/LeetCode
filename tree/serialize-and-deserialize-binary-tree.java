@@ -11,24 +11,24 @@ public class Codec {
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder(); 
         if (root == null){
             return "#"; 
         }
-        String serialTree = ""; 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root); 
         while (!queue.isEmpty()){
             TreeNode curNode = queue.poll();
             if (curNode != null){
-                serialTree +=  String.valueOf(curNode.val) + ","; 
+                sb.append(curNode.val).append(","); 
                 queue.add(curNode.left);
                 queue.add(curNode.right);
             }else{
-                serialTree += "#,"; 
+                sb.append("#,"); 
             }
         }
-        System.out.println(serialTree); 
-        return serialTree; 
+        sb.setLength(sb.length()-1); 
+        return sb.toString(); 
     }
 
     // Decodes your encoded data to tree.
@@ -36,12 +36,12 @@ public class Codec {
         if (data.equals("#")){
             return null; 
         }
-        int idx = 0; 
+
         String[] dataArray = data.split(","); 
         Queue<TreeNode> queue = new LinkedList<>(); 
         TreeNode root = new TreeNode(Integer.parseInt(dataArray[0])); 
         queue.add(root); 
-        idx++; 
+        int idx = 1; 
 
         while(!queue.isEmpty()){
             TreeNode curNode = queue.poll();
