@@ -20,11 +20,11 @@ public class Codec {
         while (!queue.isEmpty()){
             TreeNode curNode = queue.poll();
             if (curNode != null){
-                serialTree += String.valueOf(curNode.val); 
+                serialTree +=  String.valueOf(curNode.val) + ","; 
                 queue.add(curNode.left);
                 queue.add(curNode.right);
             }else{
-                serialTree += "#"; 
+                serialTree += "#,"; 
             }
         }
         System.out.println(serialTree); 
@@ -37,7 +37,7 @@ public class Codec {
             return null; 
         }
         int idx = 0; 
-        String[] dataArray = data.split(""); 
+        String[] dataArray = data.split(","); 
         Queue<TreeNode> queue = new LinkedList<>(); 
         TreeNode root = new TreeNode(Integer.parseInt(dataArray[0])); 
         queue.add(root); 
